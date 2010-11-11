@@ -1,0 +1,44 @@
+<!doctype>
+<html>
+	<head>
+		<title>Smalltalk Labs Browser for blogs</title>
+		<link rel="stylesheet" type="text/css" href="/static/slbfb.css">
+		<link rel="shortcut icon" href="/static/favico.ico" /> 
+	</head>
+	<body>
+		<a href="http://github.com/haicolon/slbrowserfb"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub" /></a>
+		<center>
+		<div id="header">
+			<a href="/"><img src="/static/slb.png"></a>
+		</div>
+		<div id="content">
+			<h1>Error 404</h1>
+			
+			{% ifequal error "class" %}
+			<p>Sorry, but the class <b>{{ classname }}</b> referenced in the URL does not exist in the database.</p>
+			
+			<p>It could be spelled wrong (case is important!), or it was removed from the
+			database or it was never added to the database in the first place.</p>
+			{% endifequal %}
+			
+			{% ifequal error "zip" %}
+			<p>Sorry, but the Smalltalk implementation called <b>{{ sttype }}</b> with the
+			version <b>{{ stversion }}</b> referenced in the URL does not exist in the database.</p>
+			
+			<p>It could be that the case is wrong, the name of the Smalltalk implementation
+			must be all lowercase, e.g. "pharo", not "Pharo". It is also possible that the
+			version number is wrong. A list of available versions can be seen on the
+			<a href="http://slbrowserfb.appspot.com">index</a>
+			page of Smalltalk Labs Browser for blogs.</p>
+			{% endifequal %}
+			
+			{% ifequal error "runtime" %}
+			<p>Sorry, something went horribly wrong.</p>
+			
+			<p>There was an error while trying to access the database. You could try again in a few minutes. If the problem persists, please contact the
+			administrator (haicolon at gmail dot com).</p>
+			{% endifequal %}
+		</div>
+		</center>
+	</body>
+</html>

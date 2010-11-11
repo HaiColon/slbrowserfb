@@ -59,7 +59,13 @@ class ZippedCodeServe(zipserve.ZipHandler):
 			self.ServeFromZipFile(name, self.request.get('callback'), blobinfo.key(), self.request.get('type'), sttype, stversion)
 		else:
 			self.error(404)
-			self.response.out.write('Not found')
+			path = os.path.join(os.path.dirname(__file__), 'error.html')
+			template_values = {
+				'sttype': sttype,
+				'stversion': stversion,
+				'error': "zip"
+			}
+			self.response.out.write(template.render(path, template_values))
 			return
 
 	def ServeFromZipFile(self, name, callback, blobkey, type, sttype, stversion):
@@ -68,14 +74,23 @@ class ZippedCodeServe(zipserve.ZipHandler):
 		except (IOError, RuntimeError), err:
 			zipfile_object = ''
 		if zipfile_object == '':
-			self.error(404)
-			self.response.out.write('Not found')
+			self.error(500)
+			path = os.path.join(os.path.dirname(__file__), 'error.html')
+			template_values = {
+				'error': "runtime"
+			}
+			self.response.out.write(template.render(path, template_values))
 			return
 		try:
 			data = zipfile_object.read(name)
 		except (KeyError, RuntimeError), err:
 			self.error(404)
-			self.response.out.write('Not found')
+			path = os.path.join(os.path.dirname(__file__), 'error.html')
+			template_values = {
+				'classname': name,
+				'error': "class"
+			}
+			self.response.out.write(template.render(path, template_values))
 			return
 		content_type, encoding = mimetypes.guess_type(name)
 		if type == "json":
