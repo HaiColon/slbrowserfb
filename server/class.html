@@ -1,0 +1,126 @@
+<!doctype>
+<html>
+	<head>
+		<title>Smalltalk Labs Browser for blogs</title>
+		<link rel="stylesheet" type="text/css" href="/static/slbfb.css">
+		<link rel="shortcut icon" href="/static/favico.ico" /> 
+		<link rel="stylesheet" type="text/css" href="/static/shoutpier.min.css">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+		<script type="text/javascript">
+		function eachItem(items, block) {
+			for(var key in items) {
+				if(typeof(items[key]) == "string") {block.call(this, key, atob(items[key]))}
+			}
+		}
+		$(document).ready(function() {
+			var classdata = {{ classdata }};
+			
+			// License
+			$("div#content").append('<h2 class="codeheader">License <a href="#comment">(jump to class comment)</a></h2>');
+			var codelicense = atob(classdata["license"]);
+			if(codelicense == "pharo") {
+				codelicense = '<p><b>This code is part of <a href="http://www.pharo-project.org">Pharo</a></b></p><p>Pharo is licensed under the MIT License with parts under the Apache License.</p><p>Copyright (c) Pharo Project, and Contributors Copyright (c) 1996-2008 Viewpoints Research Institute, and Contributors Copyright (c) 1996 Apple Computer, Inc.</p><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><p>You may obtain a copy of the Apache License at:</p><p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>';
+			}
+			$("div#content").append('<div id="agreement">' + codelicense + '</div>');
+			
+			// Class Comment
+			$("div#content").append('<h2 class="codeheader"><a name="comment" />Class comment <a href="#definition">(jump to class definition)</a></h2>');
+			$("div#content").append('<div class="code">' + atob(classdata["doc"]) + '</div>');
+			
+			// Class Definition
+			$("div#content").append('<h2 class="codeheader"><a name="definition" />Class definition <a href="#imethods">(jump to instance methods)</a></h2>');
+			$("div#content").append('<div class="code">' + atob(classdata["definition"]) + '</div>');
+			
+			// Instance Methods
+			$("div#content").append('<h2 class="codeheader"><a name="imethods" />Instance methods <a href="#cmethods">(jump to class methods)</a></h2>');
+			var imethods = new Array();
+			eachItem(classdata["imethods"], function(key, value) {imethods.push(key)});
+			imethods.sort(function(a, b) {
+				var valA = a.toLowerCase();
+				var valB = b.toLowerCase();
+				return (valA < valB) ? -1 : (valA > valB) ? 1 : 0;
+			});
+			$.each(imethods, function(index, value) {
+				$("div#content").append('<a class="nostyle" href="#imethod_' + value + '">#' + value + '</a><br />');
+			});
+			$.each(imethods, function(index, value) {
+				$("div#content").append('<h3><a class="nostyle" name="imethod_' + value + '" />#' + value + '</h3>');
+				$("div#content").append('<div class="code">' + atob(classdata["imethods"][value]) + '</div>');
+			});
+			
+			// Class Methods
+			$("div#content").append('<h2 class="codeheader"><a name="cmethods" />Class methods</h2>');
+			var cmethods = new Array();
+			eachItem(classdata["cmethods"], function(key, value) {cmethods.push(key)});
+			cmethods.sort(function(a, b) {
+				var valA = a.toLowerCase();
+				var valB = b.toLowerCase();
+				return (valA < valB) ? -1 : (valA > valB) ? 1 : 0;
+			});
+			$.each(cmethods, function(index, value) {
+				$("div#content").append('<a class="nostyle" href="#cmethod_' + value + '">#' + value + '</a><br />');
+			});
+			$.each(cmethods, function(index, value) {
+				$("div#content").append('<h3><a class="nostyle" name="cmethod_' + value + '" />#' + value + '</h3>');
+				$("div#content").append('<div class="code">' + atob(classdata["cmethods"][value]) + '</div>');
+			});
+		});
+		</script>
+		<style>
+		.code {
+			line-height: normal;
+			overflow: auto;
+			background: white;
+			width: auto;
+			height: auto;
+			white-space: pre;
+			font-size: 14px;
+			font-family: monospace;
+			padding: 5px;
+		}
+		
+		h2.codeheader {
+			background: black;
+			color: white !important;
+			margin-left: -15px;
+			margin-right: -15px;
+			padding-left: 20px;
+		}
+		
+		h2.codeheader a {
+			font-size: 14px;
+			background: none !important;
+			padding: 0px !important;
+			margin: 0px !important;
+		}
+		
+		h2.codeheader a:hover {
+			color: silver !important;
+		}
+		
+		a.nostyle {
+			font-size: 16px;
+			background: none !important;
+			padding: 0px !important;
+			margin: 0px !important;
+			line-height: normal;
+			color: black !important;
+		}
+		
+		a.nostyle:hover {
+			color: gray !important;
+		}
+		</style>
+	</head>
+	<body>
+		<a href="http://github.com/haicolon/slbrowserfb"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub" /></a>
+		<center>
+		<div id="header">
+			<a href="/"><img src="/static/slb.png"></a>
+		</div>
+		<div id="content">
+			<h1>{{ sttype }} &gt; {{ stversion }} &gt; {{ classname }}</h1>
+		</div>
+		</center>
+	</body>
+</html>

@@ -1,0 +1,14 @@
+#slb_wrapper {
+	overflow: hidden;
+	position: absolute;
+	top: 100px;
+	left: 100px;
+	width: 500px;
+	height: 362px;
+	border-radius: 5px 5px 0px 0px;
+	-moz-border-radius: 5px 5px 0px 0px;
+	-webkit-box-shadow: 2px 2px 5px #333;
+	-moz-box-shadow: 2px 2px 5px #333;
+	border-left: 1px solid gray;
+	display: none;
+}

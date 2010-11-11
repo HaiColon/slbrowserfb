@@ -1,0 +1,5 @@
+*~
+*.pyc
+server/static/
+client/tools/
+client/deploy/

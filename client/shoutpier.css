@@ -1,0 +1,355 @@
+#slb_code span.default {
+	color: black;
+}
+#slb_code span.invalid {
+	color: red;
+}
+#slb_code span.excessCode {
+	color: red;
+}
+#slb_code span.comment {
+	color: #007F00;
+	font-style: italic;
+}
+#slb_code span.unfinishedComment {
+	color: #7F0000;
+	font-style: italic;
+}
+#slb_code span.character {
+	color: #7F0000;
+}
+#slb_code span.integer {
+	color: #7F0000;
+}
+#slb_code span.number {
+	color: #7F0000;
+}
+#slb_code span.symbol {
+	color: #00007F;
+	font-weight: bold;
+}
+#slb_code span.stringSymbol {
+	color: #00007F;
+	font-weight: bold;
+}
+#slb_code span.literalArray {
+	color: #00007F;
+	font-weight: bold;
+}
+#slb_code span.string {
+	color: #7F007F;
+}
+#slb_code span.unfinishedString {
+	color: red;
+}
+#slb_code span.assignment {
+	font-weight: bold;
+}
+#slb_code span.ansiAssignment {
+	font-weight: bold;
+}
+#slb_code span.literal {
+	font-weight: bold;
+}
+#slb_code span.keyword {
+	color: #00007F;
+}
+#slb_code span.binary {
+	color: #00007F;
+}
+#slb_code span.unary {
+	color: #00007F;
+}
+#slb_code span.incompleteKeyword {
+	color: #3F3F3F;
+	text-decoration: underline;
+}
+#slb_code span.incompleteBinary {
+	color: #3F3F3F;
+	text-decoration: underline;
+}
+#slb_code span.incompleteUnary {
+	color: #3F3F3F;
+	text-decoration: underline;
+}
+#slb_code span.undefinedKeyword {
+	color: red;
+}
+#slb_code span.undefinedBinary {
+	color: red;
+}
+#slb_code span.undefinedUnary {
+	color: red;
+}
+#slb_code span.patternKeyword {
+	font-weight: bold;
+}
+#slb_code span.patternBinary {
+	font-weight: bold;
+}
+#slb_code span.patternUnary {
+	font-weight: bold;
+}
+#slb_code span.self {
+	color: #7F0000;
+	font-weight: bold;
+}
+#slb_code span.super {
+	color: #7F0000;
+	font-weight: bold;
+}
+#slb_code span.true {
+	color: #7F0000;
+	font-weight: bold;
+}
+#slb_code span.false {
+	color: #7F0000;
+	font-weight: bold;
+}
+#slb_code span.nil {
+	color: #7F0000;
+	font-weight: bold;
+}
+#slb_code span.thisContext {
+	color: #7F0000;
+	font-weight: bold;
+}
+#slb_code span.return {
+	color: #7F0000;
+	font-weight: bold;
+}
+#slb_code span.patternArg {
+	color: #00007F;
+	font-style: italic;
+}
+#slb_code span.methodArg {
+	color: #00007F;
+	font-style: italic;
+}
+#slb_code span.blockPatternArg {
+	color: #00007F;
+	font-style: italic;
+}
+#slb_code span.blockArg {
+	color: #00007F;
+	font-style: italic;
+}
+#slb_code span.argument {
+	color: #00007F;
+	font-style: italic;
+}
+#slb_code span.blockArgColon {
+	color: black;
+}
+#slb_code span.leftParenthesis {
+	color: black;
+}
+#slb_code span.rightParenthesis {
+	color: black;
+}
+#slb_code span.leftParenthesis1 {
+	color: #007F00;
+}
+#slb_code span.rightParenthesis1 {
+	color: #007F00;
+}
+#slb_code span.leftParenthesis2 {
+	color: #7F007F;
+}
+#slb_code span.rightParenthesis2 {
+	color: #7F007F;
+}
+#slb_code span.leftParenthesis3 {
+	color: #7F0000;
+}
+#slb_code span.rightParenthesis3 {
+	color: #7F0000;
+}
+#slb_code span.leftParenthesis4 {
+	color: #00EA00;
+}
+#slb_code span.rightParenthesis4 {
+	color: #00EA00;
+}
+#slb_code span.leftParenthesis5 {
+	color: #EA8C00;
+}
+#slb_code span.rightParenthesis5 {
+	color: #EA8C00;
+}
+#slb_code span.leftParenthesis6 {
+	color: #EA00EA;
+}
+#slb_code span.rightParenthesis6 {
+	color: #EA00EA;
+}
+#slb_code span.leftParenthesis7 {
+	color: blue;
+}
+#slb_code span.rightParenthesis7 {
+	color: blue;
+}
+#slb_code span.blockStart {
+	color: black;
+}
+#slb_code span.blockEnd {
+	color: black;
+}
+#slb_code span.blockStart1 {
+	color: #007F00;
+}
+#slb_code span.blockEnd1 {
+	color: #007F00;
+}
+#slb_code span.blockStart2 {
+	color: #7F007F;
+}
+#slb_code span.blockEnd2 {
+	color: #7F007F;
+}
+#slb_code span.blockStart3 {
+	color: #7F0000;
+}
+#slb_code span.blockEnd3 {
+	color: #7F0000;
+}
+#slb_code span.blockStart4 {
+	color: #00EA00;
+}
+#slb_code span.blockEnd4 {
+	color: #00EA00;
+}
+#slb_code span.blockStart5 {
+	color: #EA8C00;
+}
+#slb_code span.blockEnd5 {
+	color: #EA8C00;
+}
+#slb_code span.blockStart6 {
+	color: #EA00EA;
+}
+#slb_code span.blockEnd6 {
+	color: #EA00EA;
+}
+#slb_code span.blockStart7 {
+	color: blue;
+}
+#slb_code span.blockEnd7 {
+	color: blue;
+}
+#slb_code span.arrayStart {
+	color: black;
+}
+#slb_code span.arrayEnd {
+	color: black;
+}
+#slb_code span.arrayStart1 {
+	color: black;
+}
+#slb_code span.arrayEnd1 {
+	color: black;
+}
+#slb_code span.leftBrace {
+	color: black;
+}
+#slb_code span.rightBrace {
+	color: black;
+}
+#slb_code span.cascadeSeparator {
+	color: black;
+}
+#slb_code span.statementSeparator {
+	color: black;
+}
+#slb_code span.externalCallType {
+	color: black;
+}
+#slb_code span.externalCallTypePointerIndicator {
+	color: black;
+}
+#slb_code span.primitiveOrExternalCallStart {
+	color: black;
+	font-weight: bold;
+}
+#slb_code span.primitiveOrExternalCallEnd {
+	color: black;
+	font-weight: bold;
+}
+#slb_code span.methodTempBar {
+	color: #7F7F7F;
+}
+#slb_code span.blockTempBar {
+	color: #7F7F7F;
+}
+#slb_code span.blockArgsBar {
+	color: #7F7F7F;
+}
+#slb_code span.primitive {
+	color: #007F00;
+	font-weight: bold;
+}
+#slb_code span.pragmaKeyword {
+	color: #007F00;
+	font-weight: bold;
+}
+#slb_code span.pragmaUnary {
+	color: #007F00;
+	font-weight: bold;
+}
+#slb_code span.pragmaBinary {
+	color: #007F00;
+	font-weight: bold;
+}
+#slb_code span.externalFunctionCallingConvention {
+	color: #007F00;
+	font-weight: bold;
+}
+#slb_code span.module {
+	color: #007F00;
+	font-weight: bold;
+}
+#slb_code span.blockTempVar {
+	color: #7F7F7F;
+	font-style: italic;
+}
+#slb_code span.blockPatternTempVar {
+	color: #7F7F7F;
+	font-style: italic;
+}
+#slb_code span.instVar {
+	color: black;
+	font-weight: bold;
+}
+#slb_code span.workspaceVar {
+	color: black;
+	font-weight: bold;
+}
+#slb_code span.undefinedIdentifier {
+	color: red;
+	font-weight: bold;
+}
+#slb_code span.incompleteIdentifier {
+	color: #6B6B6B;
+	font-style: italic;
+	text-decoration: underline;
+}
+#slb_code span.tempVar {
+	color: #6B6B6B;
+	font-style: italic;
+}
+#slb_code span.patternTempVar {
+	color: #6B6B6B;
+	font-style: italic;
+}
+#slb_code span.poolConstant {
+	color: #6B6B6B;
+	font-style: italic;
+}
+#slb_code span.classVar {
+	color: #6B6B6B;
+	font-weight: bold
+}
+#slb_code span.globalVar {
+	color: black;
+	font-weight: bold
+}

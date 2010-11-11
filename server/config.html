@@ -1,0 +1,199 @@
+<!doctype>
+<html>
+	<head>
+		<title>Smalltalk Labs Browser for blogs</title>
+		<link rel="stylesheet" type="text/css" href="static/slbfb.css">
+		<link rel="shortcut icon" href="/static/favico.ico" /> 
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+		<script type="text/javascript">
+		var websitetype = null;
+		var gotjquery = null;
+		var otherframework = null;
+		var dontdisplaylink = null;
+		
+		function displayInstructions() {
+			$("#question").hide();
+			
+			if(websitetype == "other") {
+				$("#instructions").append(
+					'<p>Copy this JavaScript code into your website\'s <b>&lt;head&gt;</b> tag, just before the closing <b>&lt;/head&gt;</b> tag:</p>'
+				);
+			} else if(websitetype == "tumblr") {
+				$("#instructions").append(
+					'<p>Go to your blog\'s dashboard, click on Customize, click on Theme in the menubar at the top, then click on Enable custom HTML.</p>' +
+					'<p>Then copy this JavaScript code into the theme\'s <b>&lt;head&gt;</b> tag, just before the closing <b>&lt;/head&gt;</b> tag:</p>'
+				);
+			} else if(websitetype == "blogger") {
+				$("#instructions").append(
+					'<p>Go to your blog\'s dashboard, navigate to the design tab, then click on edit HTML.</p>' +
+					'<p>Then copy this JavaScript code into the theme\'s <b>&lt;head&gt;</b> tag, just before the closing <b>&lt;/head&gt;</b> tag:</p>'
+				);
+			}
+			
+			$("#instructions").append(
+				'<textarea></textarea>'
+			);
+			
+			if(gotjquery == false) {
+				$("#instructions textarea").val(
+					'<scr' + 'ipt type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></scr' + 'ipt>\n'
+				);	
+			}
+			
+			var customcode = "";
+			if(otherframework == true) {
+				customcode = customcode + '\njQuery.noConflict();';
+			}
+			if(dontdisplaylink == true) {
+				customcode = customcode + '\nSLB.disableSLLink();';
+			}
+			
+			// SLBfb
+			$("#instructions textarea").val(
+				$("#instructions textarea").val() + '<scr' + 'ipt type="text/javascript" src="http://slbrowserfb.appspot.com/static/slbfb/v1/slbfb.min.js"></scr' + 'ipt>\n'
+			);	
+			
+			// custom code
+			if(customcode != "") {
+				$("#instructions textarea").val(
+					$("#instructions textarea").val() + '<scr' + 'ipt type="text/javascript">' + customcode + '\n</scr' + 'ipt>\n'
+				);
+			}
+			
+			$("#instructions").append(
+				'<p><b>Save your changes and you\'re done. Congratulations!</b></p>' +
+				'<p>Head on over to the link generator to see how to use the code browser in a blog post (you might want to bookmark it): <a href="/linkgen">SLBfb Link Generator</a></p>'
+			);
+			
+			$("#instructions").show();
+		}
+		
+		function askAboutJQ() {
+			$("#question").children().remove();
+			$("#question").append(
+				'<p>Do you use the jQuery JavaScript framework on your website?</p><a href="#">Yes</a> <a href="#">No</a>'
+			);
+			$("#question a").click(function(){
+				if($(this).text() == "Yes") {
+					gotjquery = true;
+					askAboutDisplayLink();
+				} else {
+					gotjquery = false;
+					$("#question").children().remove();
+					$("#question").append(
+						'<p>Do you use a JavaScript framework on your website which makes use of the $() function and thus would interfere with jQuery?</p><a href="#">Yes</a> <a href="#">No</a>'
+					);
+					$("#question a").click(function(){
+						if($(this).text() == "Yes") {
+							otherframework = true;
+							askAboutDisplayLink();
+						} else {
+							otherframework = false;
+							askAboutDisplayLink();
+						}
+					});
+				}
+			});
+		}
+		
+		function askAboutDisplayLink() {
+			$("#question").children().remove();
+			$("#question").append(
+				'<p>Disable Smalltalk Labs link?</p><p>The titlebar of the code browser by default includes a link to my Smalltalk and Newspeak related blog. If you cannot live with that you can disable this behavior by clicking on Yes here.</p><a href="#">Yes</a> <a href="#">No</a>'
+			);
+			$("#question a").click(function(){
+				if($(this).text() == "Yes") {
+					dontdisplaylink = true;
+					displayInstructions();
+				} else {
+					dontdisplaylink = false;
+					displayInstructions();
+				}
+			});
+		}
+		
+		$(document).ready(function(){
+			$("a#continue").click(function(){
+				$("#agreement_note").hide();
+				$("#info").hide();
+				$("#agreement").hide();
+				$("p#continue_box").hide();
+				$("#question").show();
+				
+				return false;
+			});
+			
+			
+			$("#question a").click(function(){
+				if($(this).text() == "Yes") {
+					$("#question").children().remove();
+					$("#question").append(
+						'<p>What kind of blog is it?</p><a href="#">Tumblr</a> <a href="#">Blogger</a> <a href="#">Other</a>'
+					);
+					$("#question a").click(function(){
+						if($(this).text() == "Tumblr") {
+							websitetype = "tumblr";
+							askAboutJQ();
+						} else if($(this).text() == "Blogger") {
+							websitetype = "blogger";
+							askAboutJQ();
+						} else if($(this).text() == "Other") {
+							websitetype = "other";
+							askAboutJQ();
+						}
+					});
+				} else {
+					$("#question").children().remove();
+					websitetype = "other";
+					askAboutJQ();
+				}
+			});
+		});
+		</script>
+	</head>
+	<body>
+		<a href="http://github.com/haicolon/slbrowserfb"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub" /></a>
+		<center>
+		<div id="header">
+			<a href="/"><img src="static/slb.png"></a>
+		</div>
+		<div id="content">
+			<h2>Configuration Interface</h2>
+			<div id="info">
+			<p>Here you can configure <b>Smalltalk Labs Browser for blogs</b> for your
+			website.</p>
+			
+			<p>But first, take a look at the license for Smalltalk Labs Browser for blogs (Apache License Version 2.0):</p>
+			</div>
+			
+<div id="agreement"><b>Smalltalk Labs Browser for blogs</b>
+This website, excluding: all images, the file "shoutpier.min.css", displayed source code, and where explicitly stated otherwise, is subject to the following license:
+
+Copyright 2010 Christoph Budzinski
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this software except in compliance with the License.
+You may obtain a copy of the License at
+
+    <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a>
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</div>
+		
+		<p id="continue_box"><a id="continue" href="#">I agree to the license conditions</a> (click to continue)</p>
+		
+		<div id="question">
+			<p>Is your website a blog?</p>
+			<a href="#">Yes</a> <a href="#">No</a>
+		</div>
+		<div id="instructions">
+			<p><b>Great! You're done with the configuration.</b></p>
+			<p>Now you've just got to install the widget on your website.</p>
+		</div>
+		</center>
+	</body>
+</html>

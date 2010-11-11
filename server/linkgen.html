@@ -1,0 +1,62 @@
+<!doctype>
+<html>
+	<head>
+		<title>SLBfb Link Generator</title>
+		<link rel="stylesheet" type="text/css" href="static/slbfb.css">
+		<link rel="shortcut icon" href="/static/favico.ico" /> 
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+		<script type="text/javascript">
+		var url = 'http://slbrowserfb.appspot.com/code/pharo/1.1/';
+		var format = "html";
+		
+		function updateLink() {
+			if(format == "html") {
+				$("textarea#linkcode").val(
+					'<a href="' + url + $("#livecontrols input").val() +'">' + $("#livecontrols input").val() + '</a>'
+				);
+			} else if(format == "markdown") {
+				$("textarea#linkcode").val(
+					'[' + $("#livecontrols input").val() + '](' + url + $("#livecontrols input").val() + ')'
+				);
+			} else if(format == "textile") {
+				$("textarea#linkcode").val(
+					'"' + $("#livecontrols input").val() + '":' + url + $("#livecontrols input").val()
+				);
+			}
+		};
+		
+		$(document).ready(function() {
+			$("#livecontrols input[type=text]").keyup(updateLink);
+			$("input[name=format]:radio").change(function() {
+				format = $(this).val();
+				updateLink();
+			});
+			$("#livecontrols select").change(updateLink);
+		});
+		</script>
+		<style type="text/css">
+		textarea {width: 100%;}
+		</style>
+	</head>
+	<body>
+		<a href="http://github.com/haicolon/slbrowserfb"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub" /></a>
+		<center>
+		<div id="header">
+			<a href="/"><img src="static/slb.png"></a>
+		</div>
+		<div id="content">
+			<h2>Link Generator</h2>
+			<textarea id="linkcode"><a href="http://slbrowserfb.appspot.com/code/pharo/1.1/ByteString">ByteString</a></textarea>
+			<div id="livecontrols">
+				<select id="selectsttype"><option value="pharo">Pharo</option></select>
+				<select id="selectstversion"><option value="1.1">1.1</option></select>
+				Class name: <input id="classname" type="text" value="ByteString">
+				<input type="radio" name="format" value="html" checked />HTML
+				<input type="radio" name="format" value="markdown" />Markdown
+				<input type="radio" name="format" value="textile" />Textile
+				<p><b>Case sensitive!</b> Class names should be written exactly like they are actually named. Everything else must be lowercase.</p>
+			</div>
+		</div>
+		</center>
+	</body>
+</html>
