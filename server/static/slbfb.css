@@ -130,6 +130,7 @@ body a img {
 	border-radius: 12px;
 	-moz-border-radius: 12px;
 	white-space: nowrap;
+	margin-right: 5px;
 }
 
 #footer a:hover {

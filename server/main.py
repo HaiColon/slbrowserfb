@@ -43,6 +43,11 @@ class PrivacyHandler(webapp.RequestHandler):
 	def get(self):
 		path = os.path.join(os.path.dirname(__file__), 'privacy.html')
 		self.response.out.write(template.render(path, None))
+		
+class LicenseHandler(webapp.RequestHandler):
+	def get(self):
+		path = os.path.join(os.path.dirname(__file__), 'license.html')
+		self.response.out.write(template.render(path, None))
 
 class CodeUploadFormHandler(webapp.RequestHandler):
 	def get(self):
@@ -88,6 +93,7 @@ def main():
 		('/config', ConfigHandler),
 		('/linkgen', LinkgenHandler),
 		('/privacy', PrivacyHandler),
+		('/license', LicenseHandler),
 		('/upload_code', CodeUploadFormHandler),
 		('/process_upload_code', CodeUploadHandler),
 		('/code/([^/]+)/([^/]+)/([^/]+)', zippedcodeserve.ZippedCodeServe)],
