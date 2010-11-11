@@ -63,7 +63,8 @@ class ZippedCodeServe(zipserve.ZipHandler):
 			template_values = {
 				'sttype': sttype,
 				'stversion': stversion,
-				'error': "zip"
+				'error': "zip",
+				'errorcode': 404
 			}
 			self.response.out.write(template.render(path, template_values))
 			return
@@ -77,7 +78,8 @@ class ZippedCodeServe(zipserve.ZipHandler):
 			self.error(500)
 			path = os.path.join(os.path.dirname(__file__), 'error.html')
 			template_values = {
-				'error': "runtime"
+				'error': "runtime",
+				'errorcode': 500
 			}
 			self.response.out.write(template.render(path, template_values))
 			return
@@ -88,7 +90,8 @@ class ZippedCodeServe(zipserve.ZipHandler):
 			path = os.path.join(os.path.dirname(__file__), 'error.html')
 			template_values = {
 				'classname': name,
-				'error': "class"
+				'error': "class",
+				'errorcode': 404
 			}
 			self.response.out.write(template.render(path, template_values))
 			return

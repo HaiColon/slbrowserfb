@@ -11,7 +11,7 @@
 			<a href="/"><img src="/static/slb.png"></a>
 		</div>
 		<div id="content">
-			<h1>Error 404</h1>
+			<h1>Error {{ errorcode }}</h1>
 			
 			{% ifequal error "class" %}
 			<p>Sorry, but the class <b>{{ classname }}</b> referenced in the URL does not exist in the database.</p>
