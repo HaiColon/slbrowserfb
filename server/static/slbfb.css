@@ -115,3 +115,23 @@ body a img {
 	font-family: monospace;
 	font-size: 14px;
 }
+
+#footer {
+	margin: 10px;
+}
+
+#footer a {
+	text-decoration: none;
+	color: white;
+	background: #333;
+	padding: 3px;
+	padding-left: 6px;
+	padding-right: 6px;
+	border-radius: 12px;
+	-moz-border-radius: 12px;
+	white-space: nowrap;
+}
+
+#footer a:hover {
+	background: #aaa;
+}

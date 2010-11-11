@@ -1,0 +1,16 @@
+<!doctype>
+<html>
+<head>
+<title>{% block title %}Smalltalk Labs Browser for blogs{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href="/static/slbfb.css">
+{% block head %}{% endblock %}
+</head>
+<body>
+<a href="http://github.com/haicolon/slbrowserfb"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub" /></a>
+<center>
+<div id="header"><a href="/"><img src="/static/slb.png"></a></div>
+<div id="content">{% block content %}{% endblock %}</div>
+<div id="footer"><a href="/privacy">Privacy Policy</a></div>
+</center>
+</body>
+</html>

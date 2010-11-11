@@ -1,116 +1,105 @@
-<!doctype>
-<html>
-	<head>
-		<title>Smalltalk Labs Browser for blogs</title>
-		<link rel="stylesheet" type="text/css" href="static/slbfb.css">
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-		<script type="text/javascript" src="http://slbrowserfb.appspot.com/static/slbfb/v1/slbfb.min.js"></script>
+{% extends "base.html" %}
 
-	</head>
-	<body>
-		<a href="http://github.com/haicolon/slbrowserfb"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub" /></a>
-		<center>
-		<div id="header">
-			<a href="/"><img src="static/slb.png"></a>
-		</div>
-		<div id="content">
-			<div class="hbox" style="margin-top: 0px;"><h2 style="padding-top: 0px;">What is this?</h2></div>
-			<div class="cbox"><p><b>Smalltalk Labs Browser for blogs</b> is a JavaScript widget
-			that you can put on	your blog (or any other kind of website) to allow
-			your blog's readers to
-			display any Smalltalk class you mention in a blog post in a web based code browser,
-			so that they don't need to have a Smalltalk image handy when you mention
-			a class in an article or tutorial.</p>
-			
-			<p><strong>You can try it out by clicking on this Pharo Smalltalk class here</strong>:
-			<a href="http://slbrowserfb.appspot.com/code/pharo/1.1/ByteString">ByteString</a></p>
-			
-			<p>(If you don't use a Mozilla or WebKit browser, you will see a website
-			instead of the code browser)</p>
-			
-			<p>You don't need to have a blog that
-			runs on Smalltalk for this, <b>Smalltalk Labs Browser for
-			blogs</b> works as a JavaScript widget on your blog and fetches all
-			the information about a Smalltalk class
-			from a database over the net through AJAX, which means it works on most free blog hosts like
-			<a href="http://www.tumblr.com">Tumblr</a> and
-			<a href="http://www.blogger.com">Blogger</a>, the only requirement
-			is that you can add custom JavaScript to your blog's theme or your
-			website's HTML code.</p></div>
-			
-			<div class="hbox"><h2>What classes are in this database?</h2></div>
-			<div class="cbox"><p>At the moment there are all classes of <b>Pharo 1.1</b> in the database.</p>
-			
-			<p>Popular open source Smalltalk libraries and frameworks will be added soon, e.g. Seaside and Pier.</p>
-			
-			<p>Squeak is coming up next, then other Smalltalks (where the license
-			allows code redistribution).</p>
-			
-			<p>When a new version of a Smalltalk implementation is uploaded, for example
-			Pharo 1.2, the old version is kept so that your old blog posts, articles or
-			tutorials still work and point to the right version of a class which might
-			have changed or was even removed in a newer release. This isn't a guarantee though,
-			I might still be forced to remove a version of a Smalltalk implementation or
-			specific classes in a version. This shouldn't happen but you never know.</p>
-			</div>
-			
-			<div class="hbox"><h2>What about classes that are not in the database?</h2></div>
-			<div class="cbox"><p>You will soon be able to upload your own classes, or classes that you
-			are allowed to redistribute, into the database yourself. These
-			classes will only show up in <b>your</b> version of <b>Smalltalk Labs
-			Browser for blogs</b>, not in anyone else's. It will work a bit like a code snippet / pastie service.</p></div>
-			
-			<div class="hbox"><h2>Sounds cool. How much does it cost?</h2></div>
-			<div class="cbox">Nothing! This is an open source project that will hopefully benefit the
-			whole Smalltalk community and anyone interested in learning Smalltalk. The Smalltalk Labs text in the title of the
-			code browser links to my <a href="http://smalltalklabs.tumblr.com">Smalltalk Labs</a> blog (where you can find free Smalltalk and Newspeak related
-			tutorials and screencasts). You can easily disable this if you can't live with that, the interactive
-			install docs will ask you if you want to do so.</p>
-			<p>
-			You can get the code at <a href="http://www.github.com/haicolon/slbrowserfb">Github</a> under the open source
-			"Apache License, Version 2.0", with portions licensed under the MIT license.
+{% block head %}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://slbrowserfb.appspot.com/static/slbfb/v1/slbfb.min.js"></script>
+{% endblock %}
 
-			</p></div>
-			
-			<div class="hbox"><h2>How do updates work?</h2></div>
-			<div class="cbox">
-			<p>
-			You receive <b>updates</b> automatically since you don't download the JavaScript widget but
-			instead just include it on your website from this server.
-			These updates will add new features and fix bugs or security holes.
-			</p>
-			
-			<p>
-			<b>Upgrades</b> are manual. Upgrades happen when there are breaking changes in the (soon
-			to come) public API for any reason, or if there
-			is anything else that would need you to manually change something on your website. This
-			shouldn't happen too often (or at all).
-			The old version will be kept available so that you can take your time to upgrade
-			to a never version. Upgrading itself is easy, you just change /v1/ to the new version
-			number in the URL to the JavaScript file.
-			</p>
-			
-			<p>You can see the currently deployed version of the Client and the Server below. This
-			might help in tracking down a bug if you encounter a problem. The version number relates to upgrades and
-			the build number to updates. The code repository uses these version numbers in
-			<a href="http://gitref.org/branching/#tag">tags</a>,
-			so you can easily view a list of all code commits between two or more versions or upgrades
-			if you want to see what has been changed in the newest version for example.</p>
-			
-			<b>Version 1, build 1</b> - deployed November 11th, 2010</p>
-			</div>
-			
-			<div class="hbox"><h2>I want to give feedback!</h2></div>
-			<div class="cbox"><p>That's awesome! You can reach me by email (haicolon at gmail dot com) or
-			Twitter <a href="http://www.twitter.com/HaiColon">@HaiColon</a>.</p>
-			<p>If you encounter a bug, head on over to the issue tracker on
-			<a href="http://www.github.com/haicolon/slbrowserfb/issues">Github</a>.</p></div>
-			
-			<div class="hbox"><h2>Enough talk! How do I add it to my blog?</h2></div>
-			<div class="cbox"><p>Nothing easier than that! Just head over to the
-			<a href="/config">configuration</a> interface where you get personalized
-			instructions by answering a handful of multiple choice type questions about your blog/website, no signup necessary.</p></div>
-		</div>
-		</center>
-	</body>
-</html>
+{% block content %}
+<div class="hbox" style="margin-top: 0px;"><h2 style="padding-top: 0px;">What is this?</h2></div>
+<div class="cbox"><p><b>Smalltalk Labs Browser for blogs</b> is a JavaScript widget
+that you can put on	your blog (or any other kind of website) to allow
+your blog's readers to
+display any Smalltalk class you mention in a blog post in a web based code browser,
+so that they don't need to have a Smalltalk image handy when you mention
+a class in an article or tutorial.</p>
+
+<p><strong>You can try it out by clicking on this Pharo Smalltalk class here</strong>:
+<a href="http://slbrowserfb.appspot.com/code/pharo/1.1/ByteString">ByteString</a></p>
+
+<p>(If you don't use a Mozilla or WebKit browser, you will see a website
+instead of the code browser)</p>
+
+<p>You don't need to have a blog that
+runs on Smalltalk for this, <b>Smalltalk Labs Browser for
+blogs</b> works as a JavaScript widget on your blog and fetches all
+the information about a Smalltalk class
+from a database over the net through AJAX, which means it works on most free blog hosts like
+<a href="http://www.tumblr.com">Tumblr</a> and
+<a href="http://www.blogger.com">Blogger</a>, the only requirement
+is that you can add custom JavaScript to your blog's theme or your
+website's HTML code.</p></div>
+
+<div class="hbox"><h2>What classes are in this database?</h2></div>
+<div class="cbox"><p>At the moment there are all classes of <b>Pharo 1.1</b> in the database.</p>
+
+<p>Popular open source Smalltalk libraries and frameworks will be added soon, e.g. Seaside and Pier.</p>
+
+<p>Squeak is coming up next, then other Smalltalks (where the license
+allows code redistribution).</p>
+
+<p>When a new version of a Smalltalk implementation is uploaded, for example
+Pharo 1.2, the old version is kept so that your old blog posts, articles or
+tutorials still work and point to the right version of a class which might
+have changed or was even removed in a newer release. This isn't a guarantee though,
+I might still be forced to remove a version of a Smalltalk implementation or
+specific classes in a version. This shouldn't happen but you never know.</p>
+</div>
+
+<div class="hbox"><h2>What about classes that are not in the database?</h2></div>
+<div class="cbox"><p>You will soon be able to upload your own classes, or classes that you
+are allowed to redistribute, into the database yourself. These
+classes will only show up in <b>your</b> version of <b>Smalltalk Labs
+Browser for blogs</b>, not in anyone else's. It will work a bit like a code snippet / pastie service.</p></div>
+
+<div class="hbox"><h2>Sounds cool. How much does it cost?</h2></div>
+<div class="cbox">Nothing! This is an open source project that will hopefully benefit the
+whole Smalltalk community and anyone interested in learning Smalltalk. The Smalltalk Labs text in the title of the
+code browser links to my <a href="http://smalltalklabs.tumblr.com">Smalltalk Labs</a> blog (where you can find free Smalltalk and Newspeak related
+tutorials and screencasts). You can easily disable this if you can't live with that, the interactive
+install docs will ask you if you want to do so.</p>
+<p>
+You can get the code at <a href="http://www.github.com/haicolon/slbrowserfb">Github</a> under the open source
+"Apache License, Version 2.0", with portions licensed under the MIT license.
+
+</p></div>
+
+<div class="hbox"><h2>How do updates work?</h2></div>
+<div class="cbox">
+<p>
+You receive <b>updates</b> automatically since you don't download the JavaScript widget but
+instead just include it on your website from this server.
+These updates will add new features and fix bugs or security holes.
+</p>
+
+<p>
+<b>Upgrades</b> are manual. Upgrades happen when there are breaking changes in the (soon
+to come) public API for any reason, or if there
+is anything else that would need you to manually change something on your website. This
+shouldn't happen too often (or at all).
+The old version will be kept available so that you can take your time to upgrade
+to a never version. Upgrading itself is easy, you just change /v1/ to the new version
+number in the URL to the JavaScript file.
+</p>
+
+<p>You can see the currently deployed version of the Client and the Server below. This
+might help in tracking down a bug if you encounter a problem. The version number relates to upgrades and
+the build number to updates. The code repository uses these version numbers in
+<a href="http://gitref.org/branching/#tag">tags</a>,
+so you can easily view a list of all code commits between two or more versions or upgrades
+if you want to see what has been changed in the newest version for example.</p>
+
+<b>Version 1, build 1</b> - deployed November 11th, 2010</p>
+</div>
+
+<div class="hbox"><h2>I want to give feedback!</h2></div>
+<div class="cbox"><p>That's awesome! You can reach me by email (haicolon at gmail dot com) or
+Twitter <a href="http://www.twitter.com/HaiColon">@HaiColon</a>.</p>
+<p>If you encounter a bug, head on over to the issue tracker on
+<a href="http://www.github.com/haicolon/slbrowserfb/issues">Github</a>.</p></div>
+
+<div class="hbox"><h2>Enough talk! How do I add it to my blog?</h2></div>
+<div class="cbox"><p>Nothing easier than that! Just head over to the
+<a href="/config">configuration</a> interface where you get personalized
+instructions by answering a handful of multiple choice type questions about your blog/website, no signup necessary.</p></div>
+{% endblock %}
