@@ -111,10 +111,7 @@ function askAboutDisplayLink() {
 
 $(document).ready(function(){
 	$("a#continue").click(function(){
-		$("#agreement_note").hide();
 		$("#info").hide();
-		$("#agreement").hide();
-		$("p#continue_box").hide();
 		$("#question").show();
 		
 		return false;
@@ -154,13 +151,11 @@ $(document).ready(function(){
 <div id="info">
 <p>Here you can configure <b>Smalltalk Labs Browser for blogs</b> for your
 website.</p>
-
-<p>But first, take a look at the license for Smalltalk Labs Browser for blogs (Apache License Version 2.0):</p>
-</div>
 			
 {% include "_license.html" %}
 		
 <p id="continue_box"><a id="continue" href="#">I agree to the license conditions</a> (click to continue)</p>
+</div>
 
 <div id="question">
 	<p>Is your website a blog?</p>

@@ -93,6 +93,14 @@ body a img {
 	font-size: 14px;
 }
 
+#licensebox {
+	border: 1px solid black;
+	background: #ddd;
+	padding: 10px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
 #question {
 	background: #ddd;
 	padding-left: 10px;
