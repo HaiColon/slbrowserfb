@@ -21,6 +21,30 @@ var SLB = function() {
 	var databaseurl = "http://localhost:8080/code/";
 	var isSlbLinkRegex = new RegExp(databaseurl + "([a-zA-Z]+)/([0-9\.]+)/([a-zA-Z0-9]+)");
 	var slLinkEnabled = true;
+	var isDragging = false;
+	var mouseX = 0;
+	var mouseY = 0;
+	var dragposx = 0;
+	var dragposy = 0;
+	
+	// global event handlers, at the moment only used for dragging
+	var mousePosEventHandler = function(e) {
+		mouseX = e.pageX;
+		mouseY = e.pageY;
+		
+		if(isDragging) {
+			jQuery("#slb_wrapper").css("left", mouseX - dragposx);
+			jQuery("#slb_wrapper").css("top", mouseY - dragposy);
+		}
+	}
+	var mouseUpEventHandler = function(e) {
+		if(isDragging) {
+			isDragging = false;
+			jQuery("#slb_draglayer").remove();
+			jQuery(document).unbind("mousemove", mousePosEventHandler);
+		}
+		jQuery(document).unbind("mouseup", mouseUpEventHandler);
+	}
 	
 	// private methods
 	function slbIframeFind(element) {
@@ -62,6 +86,11 @@ var SLB = function() {
 			browsedLink = null;
 			
 			slbIframeFind("body").empty();
+			
+			// remove any global event handlers that might have been
+			//   left over due to a glitch
+			jQuery(document).unbind("mousemove", mousePosEventHandler);
+			jQuery(document).unbind("mouseup", mouseUpEventHandler);
 			
 			if(onclose) {
 				onclose.call(this);
@@ -255,6 +284,28 @@ var SLB = function() {
 			
 			slbIframeFind("#slb_list a:eq(0)").addClass("selected");
 			slbIframeFind("#slb_code").html(classes[browsedLink.text()]["doc"]);
+			
+			// dragging
+			
+			slbIframeFind("#slb_header").mousedown(function(e) {
+				jQuery(document).mouseup(mouseUpEventHandler);
+				var iframe = document.getElementById("slb_frame");
+				if(iframe.contentDocument.elementFromPoint(e.pageX, e.pageY).id == "slb_header") {
+					jQuery(document).mousemove(mousePosEventHandler);
+					jQuery("#slb_wrapper").prepend('<div id="slb_draglayer"></div>');
+					jQuery("#slb_draglayer").css({
+						position: "absolute",
+						left: 0,
+						top: 0,
+						width: 500,
+						height: 362
+					});
+					isDragging = true;
+					dragposx = e.pageX;
+					dragposy = e.pageY;
+					return false;
+				}
+			});
 		}
 	}
 	
