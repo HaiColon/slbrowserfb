@@ -11,4 +11,7 @@
 	-moz-box-shadow: 2px 2px 5px #333;
 	border-left: 1px solid gray;
 	display: none;
+		
+	/* To make this work with Tumblr's dashboard iframe */
+	z-index: 5000;
 }
