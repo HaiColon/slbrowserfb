@@ -144,3 +144,47 @@ body a img {
 #footer a:hover {
 	background: #aaa;
 }
+
+#commits {
+	padding: 5px;
+	width: auto;
+	height: 200px;
+	overflow: auto;
+	overflow-x: hidden;
+	background: #eee;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+#commits a {
+	background: none;
+	padding: 0px;
+	margin: 0px;
+	line-height: normal;
+	color: black;
+}
+
+#commits a:hover {
+	background: none;
+	text-decoration: underline;
+	color: black;
+}
+
+#commits_header {
+	border-radius: 5px 5px 0px 0px;
+	-moz-border-radius: 5px 5px 0px 0px;
+	background: gray;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #777),color-stop(1, #000));
+	background: -moz-linear-gradient(center bottom, #000 0%, #777 100%);
+	color: silver;
+	padding-left: 5px;
+}
+
+span.date {
+	background: silver;
+	padding: 3px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	white-space: nowrap;
+	margin-right: 5px;
+}

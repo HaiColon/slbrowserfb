@@ -3,6 +3,23 @@
 {% block head %}
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <script type="text/javascript" src="http://slbrowserfb.appspot.com/static/slbfb/v1/slbfb.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$.getJSON("http://github.com/api/v2/json/commits/list/haicolon/slbrowserfb/master?callback=?", function(data, status, request) {
+		$.each(data.commits, function(index, item) {
+			var date = item.committed_date.split("T")[0];
+			var time = item.committed_date.split("T")[1].split("-")[0];
+			var year = date.split("-")[0];
+			var month = date.split("-")[1];
+			var day = date.split("-")[2];
+			var hour = time.split(":")[0];
+			var minute = time.split(":")[1];
+			var committed_at = month + "/" + day + "/" + year + " - " + hour + ":" + minute;
+			$("#commits").append('<div class="commit"><span class="date">' + committed_at + '</span><a href="http://github.com' + item.url + '">' + item.message.split("\n")[0] + '</a></div>');
+		});
+	});
+});
+</script>
 {% endblock %}
 
 {% block content %}
@@ -91,6 +108,12 @@ so you can easily view a list of all code commits between two or more versions o
 if you want to see what has been changed in the newest version for example.</p>
 
 <b>Version 1, build 2</b> - deployed November 13th, 2010</p>
+
+<div id="commits_box">
+<div id="commits_header">Recent commits on Github (MM/DD/YYYY)</div>
+<div id="commits"></div>
+</div>
+
 </div>
 
 <div class="hbox"><h2>I want to give feedback!</h2></div>
