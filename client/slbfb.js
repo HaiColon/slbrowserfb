@@ -26,6 +26,8 @@ var SLB = function() {
 	var mouseY = 0;
 	var dragposx = 0;
 	var dragposy = 0;
+	var isDownloading = false;
+	var downloadTimeouts = new Array();
 	
 	// global event handlers, at the moment only used for dragging
 	var mousePosEventHandler = function(e) {
@@ -171,14 +173,35 @@ var SLB = function() {
 	}
 
 	function slbRenderBrowserContent() {
+		// clear all running download timeouts (if any)
+		jQuery.each(downloadTimeouts, function(index, value) {
+			clearTimeout(value);
+		});
+		downloadTimeouts = new Array();
+		
 		if(typeof(classes[browsedLink.text()]) == "undefined") {
 			var classname = browsedLink.text();
 			var sttype = classesmeta[classname]["sttype"];
 			var stversion = classesmeta[classname]["stversion"];
+			isDownloading = true;
 			jQuery.getJSON(databaseurl + sttype + "/" + stversion + "/" + classname + "?type=json&callback=?", function(data, textStatus, xhr) {
 				SLB.addData(data);
 				slbRenderBrowserContent();
+				isDownloading = false;
 			});
+			
+			// timeout based error handling since cross domain requests with JSONP
+			//   don't support any kind of error handling at the moment
+			downloadTimeouts.push(setTimeout(function() {
+				if(isDownloading) {
+					// Show an error message for 2 seconds, then close the window
+					slbIframeFind("#slb_header").text("Error: Couldn't download class data");
+					setTimeout(function() {
+						isDownloading = false;
+						slbCloseBrowser();
+					}, 2000);
+				}
+			}, 15000));
 		} else {
 			slbIframeFind("#slb_box").html('<div id="slb_list_wrapper"><div id="slb_list"></div></div><div id="slb_code_wrapper"><div id="slb_code"></div></div>');
 			
