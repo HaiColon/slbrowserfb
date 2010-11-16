@@ -28,6 +28,7 @@ var SLB = function() {
 	var dragposy = 0;
 	var isDownloading = false;
 	var downloadTimeout = null;
+	var downloadRequest = null;
 	
 	// global event handlers, at the moment only used for dragging
 	var mousePosEventHandler = function(e) {
@@ -164,7 +165,20 @@ var SLB = function() {
 		browsedLink = sender;
 		
 		slbClearDownloadTimeout();
-		slbIframeFind("body").append('<div id="slb_header">Loading class data, please wait...</div><div id="slb_content"><div id="slb_license_wrapper"><div id="slb_license"></div></div><div id="slb_box"></div></div><div id="slb_footer"><div id="slb_togglelist_wrapper"><a href="#" id="slb_togglelist">Hide List</a></div><div id="slb_togglelicense_wrapper"><a href="#" id="slb_togglelicense">Show License </a></div></div>');
+		
+		// cancel previous download request (if available)
+		downloadRequest = null;
+		
+		slbIframeFind("body").append('<div id="slb_header">Loading class data, please wait...<div id="slb_close">X</div></div><div id="slb_content"><div id="slb_license_wrapper"><div id="slb_license"></div></div><div id="slb_box"></div></div><div id="slb_footer"><div id="slb_togglelist_wrapper"><a href="#" id="slb_togglelist">Hide List</a></div><div id="slb_togglelicense_wrapper"><a href="#" id="slb_togglelicense">Show License </a></div></div>');
+		
+		slbIframeFind("#slb_close").click(function() {
+			// cancel previous download request (if available)
+			downloadRequest = null;
+			
+			slbCloseBrowser();
+			
+			return false;
+		});
 		
 		jQuery("#slb_wrapper").css("top", y);
 		slbPositionBrowserX();
@@ -188,10 +202,15 @@ var SLB = function() {
 			var sttype = classesmeta[classname]["sttype"];
 			var stversion = classesmeta[classname]["stversion"];
 			isDownloading = true;
+			var requestTime = new Date().getTime();
+			downloadRequest = requestTime;
 			jQuery.getJSON(databaseurl + sttype + "/" + stversion + "/" + classname + "?type=json&callback=?", function(data, textStatus, xhr) {
-				SLB.addData(data);
-				slbRenderBrowserContent();
-				isDownloading = false;
+				if(downloadRequest == requestTime) {
+					SLB.addData(data);
+					slbRenderBrowserContent();
+					isDownloading = false;
+				} else {
+				}
 			});
 			
 			// timeout based error handling since cross domain requests with JSONP
