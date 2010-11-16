@@ -27,7 +27,7 @@ var SLB = function() {
 	var dragposx = 0;
 	var dragposy = 0;
 	var isDownloading = false;
-	var downloadTimeouts = new Array();
+	var downloadTimeout = null;
 	
 	// global event handlers, at the moment only used for dragging
 	var mousePosEventHandler = function(e) {
@@ -78,7 +78,14 @@ var SLB = function() {
 		slbPositionBrowserX();
 	}
 	
+	function slbClearDownloadTimeout() {
+		// clear download timeout (if available)
+		if(downloadTimeout != null) {clearTimeout(downloadTimeout); downloadTimeout = null;}
+	}
+	
 	function slbCloseBrowser(onclose) {
+		slbClearDownloadTimeout();
+		
 		jQuery("#slb_wrapper").animate({
 			height: 0,
 			top: jQuery("#slb_wrapper").offset().top + 370
@@ -156,6 +163,7 @@ var SLB = function() {
 	function slbCreateBrowser(x, y, sender) {
 		browsedLink = sender;
 		
+		slbClearDownloadTimeout();
 		slbIframeFind("body").append('<div id="slb_header">Loading class data, please wait...</div><div id="slb_content"><div id="slb_license_wrapper"><div id="slb_license"></div></div><div id="slb_box"></div></div><div id="slb_footer"><div id="slb_togglelist_wrapper"><a href="#" id="slb_togglelist">Hide List</a></div><div id="slb_togglelicense_wrapper"><a href="#" id="slb_togglelicense">Show License </a></div></div>');
 		
 		jQuery("#slb_wrapper").css("top", y);
@@ -173,11 +181,7 @@ var SLB = function() {
 	}
 
 	function slbRenderBrowserContent() {
-		// clear all running download timeouts (if any)
-		jQuery.each(downloadTimeouts, function(index, value) {
-			clearTimeout(value);
-		});
-		downloadTimeouts = new Array();
+		slbClearDownloadTimeout();
 		
 		if(typeof(classes[browsedLink.text()]) == "undefined") {
 			var classname = browsedLink.text();
@@ -192,7 +196,7 @@ var SLB = function() {
 			
 			// timeout based error handling since cross domain requests with JSONP
 			//   don't support any kind of error handling at the moment
-			downloadTimeouts.push(setTimeout(function() {
+			downloadTimeout = (setTimeout(function() {
 				if(isDownloading) {
 					// Show an error message for 2 seconds, then close the window
 					slbIframeFind("#slb_header").text("Error: Couldn't download class data");
